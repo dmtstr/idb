@@ -1,0 +1,14 @@
+{
+  "name": "plainidb",
+  "version": "1.0.0",
+  "scripts": {
+    "serve": "webpack-dev-server --env=development",
+    "build": "webpack --env=production"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
