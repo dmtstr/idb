@@ -28,5 +28,8 @@
   },
   "bugs": {
     "url": "https://github.com/karpovsystems/idb/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

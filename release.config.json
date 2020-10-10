@@ -5,8 +5,5 @@
   "git": {
     "requireBranch": "master",
     "requireUpstream": false
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
