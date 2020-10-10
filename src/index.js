@@ -108,7 +108,7 @@ class DB {
     }
 
 
-    // Adds records to a store
+    // Adds records to the store
 
     async add (name, records) {
 
@@ -126,7 +126,7 @@ class DB {
     }
 
 
-    // Deletes items from a store
+    // Deletes items from the store
 
     async delete (name, ids) {
 
@@ -173,7 +173,7 @@ class DB {
     }
 
 
-    // Updates items in a store
+    // Gets items from the store
 
     async get (name, ids) {
 
