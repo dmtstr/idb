@@ -5,7 +5,7 @@
 
 // Converts argument to array
 
-export function toArray (items) {
+function toArray (items) {
     if (!items) return [];
     if (Array.isArray(items)) return items;
     return [items];
@@ -49,7 +49,7 @@ function createStore (self, name) {
 
 // Executes transaction
 
-export function transact (self, options, exec) {
+function transact (self, options, exec) {
     return new Promise((resolve, reject) => {
 
         const transaction = self.db.transaction(options.name, options.mode);
