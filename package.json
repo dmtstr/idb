@@ -1,6 +1,6 @@
 {
   "name": "@karpovsystems/idb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tiny storage library based on IndexedDB",
   "homepage": "https://github.com/karpovsystems/idb#readme",
   "author": "Dmitriy Karpov",
