@@ -3,6 +3,7 @@
     "after:bump": "npm run build"
   },
   "git": {
-    "requireBranch": "master"
+    "requireBranch": "master",
+    "requireUpstream": false
   }
 }
