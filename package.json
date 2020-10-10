@@ -11,9 +11,11 @@
   ],
   "scripts": {
     "serve": "webpack-dev-server --env=development",
-    "build": "webpack --env=production"
+    "build": "webpack --env=production",
+    "release": "release-it --config release.config.json --ci"
   },
   "devDependencies": {
+    "release-it": "^14.0.4",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
