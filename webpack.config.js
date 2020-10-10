@@ -12,6 +12,7 @@ module.exports = mode => ({
     output: {
         library: 'idb',
         libraryExport: 'default',
+        libraryTarget: 'umd',
         filename: 'idb.js'
     },
 
