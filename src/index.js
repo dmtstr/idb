@@ -108,6 +108,13 @@ class DB {
     }
 
 
+    // List database stores
+
+    stores () {
+        return Array.from(this.db.objectStoreNames);
+    }
+
+
     // Adds records to the store
 
     async add (name, records) {
