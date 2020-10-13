@@ -29,24 +29,6 @@ function upgrade (self, upgrade) {
 }
 
 
-// Checks if the database has a store
-
-export function hasStore (self, name) {
-    return self.db.objectStoreNames.contains(name);
-}
-
-
-// Creates a store if not exists
-
-function createStore (self, name) {
-    return new Promise(async resolve => {
-        if (self.db.objectStoreNames.contains(name)) return resolve();
-        await upgrade(self, db => db.createObjectStore(name, {keyPath: 'id'}))
-        resolve();
-    })
-}
-
-
 // Executes transaction
 
 function transact (self, options, exec) {
@@ -108,10 +90,36 @@ class DB {
     }
 
 
-    // List database stores
+    // Lists database stores
 
-    stores () {
+    get stores () {
         return Array.from(this.db.objectStoreNames);
+    }
+
+
+    // Checks if the store exists
+
+    hasStore (name) {
+        return this.db.objectStoreNames.contains(name)
+    }
+
+
+    // Creates a new store
+
+    async addStore (name, options = {keyPath: 'id'}) {
+        return new Promise(async resolve => {
+            if (this.hasStore(name)) return resolve();
+            await upgrade(this, db => db.createObjectStore(name, options))
+            resolve();
+        })
+    }
+
+
+    // Deletes the store
+
+    async deleteStore (name) {
+        if (!this.hasStore(name)) return;
+        return upgrade(this, db => db.deleteObjectStore(name));
     }
 
 
@@ -119,7 +127,7 @@ class DB {
 
     async add (name, records) {
 
-        await createStore(this, name);
+        await this.addStore(name);
 
         const options = {
             name,
@@ -137,12 +145,12 @@ class DB {
 
     async delete (name, ids) {
 
-        if (!hasStore(this, name)) {
+        if (!this.hasStore(name)) {
             return Promise.reject(error(this, new Error(`Store "${name}" was not found`)))
         }
 
         if (ids === undefined) {
-            await upgrade(this, db => db.deleteObjectStore(name));
+            await this.deleteStore(name);
             return Promise.resolve();
         }
 
@@ -163,7 +171,7 @@ class DB {
 
     async put (name, records) {
 
-        if (!hasStore(this, name)) {
+        if (!this.hasStore(name)) {
             return Promise.reject(error(this, new Error(`Store "${name}" was not found`)))
         }
 
@@ -184,7 +192,7 @@ class DB {
 
     async get (name, ids) {
 
-        if (!hasStore(this, name)) {
+        if (!this.hasStore(name)) {
             return Promise.reject(error(this, new Error(`Store "${name}" was not found`)))
         }
 
